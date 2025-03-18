@@ -22,8 +22,6 @@ def afficher_menu_principal():
     titre.pack(pady=20)
     bouton_start = tk.Button(menu_frame, text="Start", font=("Arial", 16), command=commencer_partie)
     bouton_start.pack(pady=10)
-    bouton_charger = tk.Button(menu_frame, text="Charger une partie", font=("Arial", 16), command=charger_partie)
-    bouton_charger.pack(pady=10)
 
 def commencer_partie():
     global menu_frame, jeu_frame, canvas, bouton_annuler, bouton_sauvegarder, bouton_retour_menu
@@ -35,8 +33,8 @@ def commencer_partie():
     canvas.bind("<Button-1>", clic)
     bouton_annuler = tk.Button(jeu_frame, text="Annuler", font=("Arial", 14), command=annuler_dernier_coup)
     bouton_annuler.pack(pady=5)
-    bouton_sauvegarder = tk.Button(jeu_frame, text="Sauvegarder", font=("Arial", 14), command=sauvegarder_partie)
-    bouton_sauvegarder.pack(pady=5)
+    #bouton_sauvegarder = tk.Button(jeu_frame, text="Sauvegarder", font=("Arial", 14), command=sauvegarder_partie)
+    #bouton_sauvegarder.pack(pady=5)
     bouton_retour_menu = tk.Button(jeu_frame, text="Retour au menu", font=("Arial", 14), command=retour_au_menu)
     bouton_retour_menu.pack(pady=5)
     if not hasattr(commencer_partie, 'partie_chargee'):
@@ -97,30 +95,6 @@ def annuler_dernier_coup():
     joueur_actuel = 3 - joueur_actuel
     dessiner_plateau()
 
-def sauvegarder_partie():
-    with open("sauvegarde.txt", "w") as f:
-        for ligne in plateau:
-            f.write(" ".join(map(str, ligne)) + "\n")
-        f.write(str(joueur_actuel) + "\n")
-    messagebox.showinfo("Sauvegarde", "Partie sauvegardée avec succès !")
-
-def charger_partie():
-    global plateau, joueur_actuel, partie_en_cours, historique_coups
-    try:
-        with open("sauvegarde.txt", "r") as f:
-            for ligne in range(LIGNES):
-                cases = list(map(int, f.readline().split()))
-                plateau[ligne] = cases
-            joueur_actuel = int(f.readline())
-        partie_en_cours = True
-        historique_coups = []
-        commencer_partie.partie_chargee = True
-        commencer_partie()
-        dessiner_plateau()
-        messagebox.showinfo("Chargement", "Partie chargée avec succès !")
-    except FileNotFoundError:
-        messagebox.showerror("Erreur", "Aucune sauvegarde trouvée !")
-
 def verifier_victoire(ligne, colonne):
     directions = [
         (1, 0),
@@ -149,7 +123,7 @@ def clic(event):
 
 root = tk.Tk()
 root.title("Puissance 4")
-root.geometry(f"{COLONNES * TAILLE_CASE}x{LIGNES * TAILLE_CASE + 150}")  # Taille fixe de la fenêtre
+root.geometry(f"{COLONNES * TAILLE_CASE}x{LIGNES * TAILLE_CASE + 150}")
 
 afficher_menu_principal()
 
