@@ -33,8 +33,6 @@ def commencer_partie():
     canvas.bind("<Button-1>", clic)
     bouton_annuler = tk.Button(jeu_frame, text="Annuler", font=("Arial", 14), command=annuler_dernier_coup)
     bouton_annuler.pack(pady=5)
-    #bouton_sauvegarder = tk.Button(jeu_frame, text="Sauvegarder", font=("Arial", 14), command=sauvegarder_partie)
-    #bouton_sauvegarder.pack(pady=5)
     bouton_retour_menu = tk.Button(jeu_frame, text="Retour au menu", font=("Arial", 14), command=retour_au_menu)
     bouton_retour_menu.pack(pady=5)
     if not hasattr(commencer_partie, 'partie_chargee'):
