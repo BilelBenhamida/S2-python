@@ -26,7 +26,7 @@ premier_joueur_manche = 1
 def interpoler_couleur(couleur1, couleur2, ratio):
     '''
     Crée une couleur intermédiaire entre deux couleurs selon un ratio.
-    (Aidé par : ChatGPT en raison de la complexité de la fonction et des codes couleurs )
+    (Aidé par : ChatGPT en raison de la complexité de la fonction et des codes couleurs)
     '''
     r1, g1, b1 = int(couleur1[1:3], 16), int(couleur1[3:5], 16), int(couleur1[5:7], 16)
     r2, g2, b2 = int(couleur2[1:3], 16), int(couleur2[3:5], 16), int(couleur2[5:7], 16)
@@ -106,6 +106,7 @@ def animer_jetons_gagnants(ligne, colonne):
 def dessiner_jeton(ligne, colonne):
     '''
     Dessine un jeton avec effets 3D.
+    (Aidé par : ChatGPT en raison de la complexité de la fonction et des effets 3D)
     '''
     centre_x = colonne * TAILLE_CASE + TAILLE_CASE // 2
     centre_y = ligne * TAILLE_CASE + TAILLE_CASE // 2
@@ -190,6 +191,7 @@ def afficher_menu_principal():
 def basculer_mode_ia():
     '''
     Active/désactive le mode IA.
+    (Aidé par : ChatGPT en raison de la complexité switch ON/OFF)
     '''
     global MODE_IA
     MODE_IA = not MODE_IA

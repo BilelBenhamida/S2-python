@@ -16,7 +16,7 @@ Ce projet a été réalisé par :
 - **Sheyma Abbes**
 - **Bilel Benhamida** *(Responsable de la publication du code)*
 - **Wafaa Chakeur** *(Responsable de la révision du code et documentation avec Docstring)*
-- **Idris Hernadote**
+- **Idris Ernadote**
 
 ## 🛠️ Fonctionnalités techniques
 
