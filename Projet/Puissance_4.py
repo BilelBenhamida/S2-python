@@ -19,7 +19,7 @@ joueur_actuel = 1
 partie_en_cours = True
 historique_coups = []
 scores = [0, 0]
-manche_terminee = Falsetk
+manche_terminee = False
 premier_joueur_manche = 1
 
 
@@ -34,7 +34,6 @@ def interpoler_couleur(couleur1, couleur2, ratio):
 
 
 def animer_victoire_manche(joueur):
-$
     couleur = COULEUR_JOUEUR1 if joueur == 1 else COULEUR_JOUEUR2
     barre_victoire = tk.Canvas(jeu_frame, width=0, height=10, bg=couleur, highlightthickness=0)
     barre_victoire.place(relx=0.5, rely=0.92, anchor=tk.CENTER)
