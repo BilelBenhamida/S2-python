@@ -19,7 +19,7 @@ joueur_actuel = 1
 partie_en_cours = True
 historique_coups = []
 scores = [0, 0]
-manche_terminee = Falsetk
+manche_terminee = False
 premier_joueur_manche = 1
 
 
