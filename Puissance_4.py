@@ -24,7 +24,10 @@ premier_joueur_manche = 1
 
 
 def interpoler_couleur(couleur1, couleur2, ratio):
-
+    '''
+    Crée une couleur intermédiaire entre deux couleurs selon un ratio.
+    (Aidé par : ChatGPT en raison de la complexité de la fonction et des codes couleurs )
+    '''
     r1, g1, b1 = int(couleur1[1:3], 16), int(couleur1[3:5], 16), int(couleur1[5:7], 16)
     r2, g2, b2 = int(couleur2[1:3], 16), int(couleur2[3:5], 16), int(couleur2[5:7], 16)
     r = int(r1 + (r2 - r1) * ratio)
@@ -34,6 +37,9 @@ def interpoler_couleur(couleur1, couleur2, ratio):
 
 
 def animer_victoire_manche(joueur):
+    '''
+    Anime une barre de victoire pour le joueur gagnant.
+    '''
     couleur = COULEUR_JOUEUR1 if joueur == 1 else COULEUR_JOUEUR2
     barre_victoire = tk.Canvas(jeu_frame, width=0, height=10, bg=couleur, highlightthickness=0)
     barre_victoire.place(relx=0.5, rely=0.92, anchor=tk.CENTER)
@@ -50,7 +56,9 @@ def animer_victoire_manche(joueur):
 
 
 def animer_jetons_gagnants(ligne, colonne):
-
+    '''
+    Fait clignoter les jetons gagnants.
+    '''
     directions = [(1, 0), (0, 1), (1, 1), (1, -1)]
     jetons_gagnants = []
     
@@ -96,7 +104,9 @@ def animer_jetons_gagnants(ligne, colonne):
 
 
 def dessiner_jeton(ligne, colonne):
-
+    '''
+    Dessine un jeton avec effets 3D.
+    '''
     centre_x = colonne * TAILLE_CASE + TAILLE_CASE // 2
     centre_y = ligne * TAILLE_CASE + TAILLE_CASE // 2
     rayon = TAILLE_CASE // 2 - 6
@@ -130,7 +140,9 @@ def dessiner_jeton(ligne, colonne):
 
 
 def dessiner_plateau():
-
+    '''
+    Dessine le plateau de jeu complet.
+    '''
     canvas.delete("all")
     for ligne in range(LIGNES):
         for colonne in range(COLONNES):
@@ -155,7 +167,9 @@ def dessiner_plateau():
 
 
 def afficher_menu_principal():
-
+    '''
+    Affiche le menu principal.
+    '''
     global menu_frame, jeu_frame
     if 'jeu_frame' in globals():
         jeu_frame.pack_forget()
@@ -174,7 +188,9 @@ def afficher_menu_principal():
 
 
 def basculer_mode_ia():
- 
+    '''
+    Active/désactive le mode IA.
+    '''
     global MODE_IA
     MODE_IA = not MODE_IA
     for widget in jeu_frame.winfo_children():
@@ -188,7 +204,9 @@ def basculer_mode_ia():
 
 
 def afficher_parametres():
-    
+    '''
+    Affiche la fenêtre des paramètres.
+    '''
     fenetre_parametres = tk.Toplevel(root)
     fenetre_parametres.title("Paramètres du jeu")
     fenetre_parametres.resizable(False, False)
@@ -234,7 +252,9 @@ def afficher_parametres():
 
 
 def commencer_partie():
-    
+    '''
+    Lance une nouvelle partie.
+    '''
     global menu_frame, jeu_frame, canvas, label_scores, ia_button
     global plateau, joueur_actuel, partie_en_cours, historique_coups, premier_joueur_manche
     
@@ -279,7 +299,9 @@ def commencer_partie():
 
 
 def initialiser_plateau():
-
+    '''
+    Initialise le plateau de jeu.
+    '''
     global plateau, joueur_actuel, partie_en_cours, historique_coups
     plateau = [[0] * COLONNES for _ in range(LIGNES)]
     partie_en_cours = True
@@ -288,7 +310,9 @@ def initialiser_plateau():
 
 
 def poser_jeton(colonne):
-
+    '''
+    Place un jeton dans la colonne spécifiée.
+    '''
     global joueur_actuel, partie_en_cours, historique_coups, scores, manche_terminee
     
     if not partie_en_cours or colonne < 0 or colonne >= COLONNES or plateau[0][colonne] != 0:
@@ -332,6 +356,9 @@ def poser_jeton(colonne):
 
 
 def commencer_nouvelle_manche():
+    '''
+    Commence une nouvelle manche.
+    '''
     global joueur_actuel, premier_joueur_manche, manche_terminee, scores
     
     manche_terminee = False
@@ -345,6 +372,9 @@ def commencer_nouvelle_manche():
 
 
 def verifier_victoire(ligne, colonne):
+    '''
+    Vérifie si le joueur a gagné.
+    '''
     directions = [(1, 0), (0, 1), (1, 1), (1, -1)]
     for dx, dy in directions:
         compteur = 1
@@ -364,11 +394,16 @@ def verifier_victoire(ligne, colonne):
 
 
 def verifier_match_nul():
+    '''
+    Vérifie s'il y a match nul.
+    '''
     return all(plateau[0][colonne] != 0 for colonne in range(COLONNES))
 
 
 def annuler_dernier_coup():
-
+    '''
+    Annule le dernier coup joué.
+    '''
     global joueur_actuel, historique_coups
     if not historique_coups:
         return
@@ -380,6 +415,10 @@ def annuler_dernier_coup():
 
 
 def jouer_coup_ia():
+    '''
+    Fait jouer l'IA.
+    (Aidé par : ChatGPT en raison de la complexité de la création d'une IA fiable)
+    '''
     if not partie_en_cours or joueur_actuel != 2:
         return
     colonnes_valides = [col for col in range(COLONNES) if plateau[0][col] == 0]
@@ -390,6 +429,9 @@ def jouer_coup_ia():
 
 
 def sauvegarder_partie():
+    '''
+    Sauvegarde la partie en cours.
+    '''
     etat_partie = {"plateau": plateau, "joueur_actuel": joueur_actuel, "historique_coups": historique_coups, "scores": scores, "premier_joueur_manche": premier_joueur_manche, "lignes": LIGNES, "colonnes": COLONNES, "alignement": ALIGNEMENT, "manches_gagnantes": MANCHES_GAGNANTES, "mode_ia": MODE_IA, "partie_en_cours": partie_en_cours, "manche_terminee": manche_terminee}
     fichier = filedialog.asksaveasfilename(defaultextension=".json", filetypes=[("Fichier JSON", "*.json")], title="Sauvegarder la partie")
     if fichier:
@@ -402,6 +444,9 @@ def sauvegarder_partie():
 
 
 def charger_partie():
+    '''
+    Charge une partie sauvegardée.
+    '''
     global plateau, joueur_actuel, historique_coups, scores, premier_joueur_manche
     global LIGNES, COLONNES, ALIGNEMENT, MANCHES_GAGNANTES, MODE_IA, partie_en_cours, manche_terminee
     fichier = filedialog.askopenfilename(filetypes=[("Fichier JSON", "*.json")], title="Charger une partie")
@@ -429,11 +474,17 @@ def charger_partie():
 
 
 def clic(event):
+    '''
+    Gère le clic de souris.
+    '''
     colonne = event.x // TAILLE_CASE
     poser_jeton(colonne)
 
 
 def retour_au_menu():
+    '''
+    Retourne au menu principal.
+    '''
     global jeu_frame, scores, manche_terminee
     jeu_frame.pack_forget()
     if not manche_terminee:
