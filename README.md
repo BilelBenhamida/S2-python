@@ -13,10 +13,10 @@ Ce projet est une implémentation du jeu classique Puissance 4 en Python, utilis
 ## 👥 Équipe
 
 Ce projet a été réalisé par :
-- **Sheyma Abbes**
-- **Bilel Benhamida** *(Responsable de la publication du code)*
-- **Wafaa Chakeur** *(Responsable de la révision du code et documentation avec Docstring)*
-- **Idris Ernadote**
+- **Sheyma ABBES ()**
+- **Bilel BENHAMIDA (22407740)** *(Responsable de la publication du code)*
+- **Wafaa CHAKEUR (22406506)** *(Responsable de la révision du code et documentation avec Docstring)*
+- **Idris ERNADOTE (22401987)**
 
 ## 🛠️ Fonctionnalités techniques
 
@@ -76,4 +76,4 @@ L'IA utilise une stratégie simple :
 1. Assurez-vous d'avoir Python 3 installé
 2. Clonez ce dépôt :
    ```bash
-   git clone https://github.com/votre-utilisateur/puissance4.git
+   git clone https://github.com/BilelBenhamida/puissance4.git Projet
