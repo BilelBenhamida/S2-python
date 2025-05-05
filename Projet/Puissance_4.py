@@ -1,8 +1,5 @@
 import tkinter as tk
-from tkinter import messagebox, simpledialog, filedialog
-import json
-import random
-import math
+from tkinter import messagebox
 
 LIGNES = 6
 COLONNES = 7
@@ -303,69 +300,6 @@ def verifier_victoire(ligne, colonne):
         if compteur >= ALIGNEMENT:
             return True
     return False
-
-
-def verifier_match_nul():
-    return all(plateau[0][colonne] != 0 for colonne in range(COLONNES))
-
-
-def annuler_dernier_coup():
-    global joueur_actuel, historique_coups
-    if not historique_coups:
-        return
-    dernier_coup = historique_coups.pop()
-    ligne, colonne = dernier_coup
-    plateau[ligne][colonne] = 0
-    joueur_actuel = 3 - joueur_actuel
-    dessiner_plateau()
-def jouer_coup_ia():
-    if not partie_en_cours or joueur_actuel != 2:
-        return
-    colonnes_valides = [col for col in range(COLONNES) if plateau[0][col] == 0]
-    if colonnes_valides:
-        colonnes_prioritaires = sorted(colonnes_valides, key=lambda x: abs(x - COLONNES//2))
-        colonne = random.choice(colonnes_prioritaires[:max(3, len(colonnes_prioritaires)//2)])
-        poser_jeton(colonne)
-
-
-def sauvegarder_partie():
-    etat_partie = {"plateau": plateau, "joueur_actuel": joueur_actuel, "historique_coups": historique_coups, "scores": scores, "premier_joueur_manche": premier_joueur_manche, "lignes": LIGNES, "colonnes": COLONNES, "alignement": ALIGNEMENT, "manches_gagnantes": MANCHES_GAGNANTES, "mode_ia": MODE_IA, "partie_en_cours": partie_en_cours, "manche_terminee": manche_terminee}
-    fichier = filedialog.asksaveasfilename(defaultextension=".json", filetypes=[("Fichier JSON", "*.json")], title="Sauvegarder la partie")
-    if fichier:
-        try:
-            with open(fichier, "w") as f:
-                json.dump(etat_partie, f)
-            messagebox.showinfo("Sauvegarde", "Partie sauvegardée avec succès !")
-        except Exception as e:
-            messagebox.showerror("Erreur", f"Erreur lors de la sauvegarde: {str(e)}")
-
-
-def charger_partie():
-    global plateau, joueur_actuel, historique_coups, scores, premier_joueur_manche
-    global LIGNES, COLONNES, ALIGNEMENT, MANCHES_GAGNANTES, MODE_IA, partie_en_cours, manche_terminee
-    fichier = filedialog.askopenfilename(filetypes=[("Fichier JSON", "*.json")], title="Charger une partie")
-    if fichier:
-        try:
-            with open(fichier, "r") as f:
-                etat_partie = json.load(f)
-            LIGNES = etat_partie["lignes"]
-            COLONNES = etat_partie["colonnes"]
-            ALIGNEMENT = etat_partie["alignement"]
-            MANCHES_GAGNANTES = etat_partie["manches_gagnantes"]
-            MODE_IA = etat_partie.get("mode_ia", False)
-            plateau = etat_partie["plateau"]
-            joueur_actuel = etat_partie["joueur_actuel"]
-            historique_coups = etat_partie["historique_coups"]
-            scores = etat_partie["scores"]
-            premier_joueur_manche = etat_partie["premier_joueur_manche"]
-            partie_en_cours = etat_partie["partie_en_cours"]
-            manche_terminee = etat_partie["manche_terminee"]
-            commencer_partie()
-            dessiner_plateau()
-            messagebox.showinfo("Chargement", "Partie chargée avec succès !")
-        except Exception as e:
-            messagebox.showerror("Erreur", f"Impossible de charger la partie: {str(e)}")
-
 
 def clic(event):
     colonne = event.x // TAILLE_CASE
