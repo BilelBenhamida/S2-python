@@ -15,8 +15,8 @@ Ce projet est une implémentation du jeu classique Puissance 4 en Python, utilis
 Ce projet a été réalisé par :
 - **Sheyma ABBES ()**
 - **Bilel BENHAMIDA (22407740)** *(Responsable de la publication du code)*
-- **Wafaa CHAKEUR (22406506)** *(Responsable de la révision du code et documentation avec Docstring)*
-- **Idris ERNADOTE (22401987)**
+- **Wafaa CHAKEUR (22401987)** *(Responsable de la révision du code et documentation avec Docstring)*
+- **Idris ERNADOTE (22406506)**
 
 ## 🛠️ Fonctionnalités techniques
 
